@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-Sketch</title>
+    <style>
+
+    #container {
+        display: grid;
+        /* justify-content: stretch;
+        align-content: stretch; */
+        margin-left: auto;
+        margin-right: auto;
+        width: 600px;
+        height: 600px;
+        grid-template-rows: repeat(var(--grid-rows), 1fr);
+        grid-template-columns: repeat(var(--grid-cols), 1fr);
+        border: 3px solid black;
+    }
+    
+        
+    
+
+     .cellEtched {
+        background-color: black;
+      }
+
+
+    </style>
+</head>
+<body>
+   <div id="container"></div>
+    
+</body>
+<script>
+    
+  const container = document.getElementById('container');
+ 
+ 
+  
+
+
+  function makeGrid(amount) {
+    container.style.setProperty('--grid-rows', amount);
+    container.style.setProperty('--grid-cols', amount);
+    for (i=0; i<(amount*amount); i++) {
+        let cell = document.createElement('div');
+        cell.classList = "cell";
+        container.appendChild(cell)
+    }
+        const cells = document.querySelectorAll(".cell").forEach(cell => {
+            cell.addEventListener('mouseover', event =>
+            {cell.classList.add("cellEtched")})
+        })
+        
+        
+  }
+
+//   function createDiv(amount) {
+//     for (i=0; i < (amount*amount); i++) {
+//         let div = document.createElement('div');
+//         div.innerText = "im a new div"
+//         div.classList = "cell"
+//         container.appendChild(div)
+//     }
+//     return 
+//   }
+
+  makeGrid(16)
+  
+
+</script>
+</html>
