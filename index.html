@@ -1,75 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-a-Sketch</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    #container {
-        display: grid;
-        /* justify-content: stretch;
+        button {
+            margin-top: 10px;
+            margin-bottom: 20px;
+
+        }
+
+        #container {
+            display: grid;
+            /* justify-content: stretch;
         align-content: stretch; */
-        margin-left: auto;
-        margin-right: auto;
-        width: 600px;
-        height: 600px;
-        grid-template-rows: repeat(var(--grid-rows), 1fr);
-        grid-template-columns: repeat(var(--grid-cols), 1fr);
-        border: 3px solid black;
-    }
-    
-        
-    
+            margin-left: auto;
+            margin-right: auto;
+            width: 600px;
+            height: 600px;
+            grid-template-rows: repeat(var(--grid-rows), 1fr);
+            grid-template-columns: repeat(var(--grid-cols), 1fr);
+            border: 3px solid black;
+        }
 
-     .cellEtched {
-        background-color: black;
-      }
+        .cell {
+            background-color: white;
+        }
 
 
+        .cellEtched {
+            background-color: black;
+        }
     </style>
 </head>
+
 <body>
-   <div id="container"></div>
-    
+    <button id="button">Reset</button>
+    <div id="container"></div>
+
 </body>
 <script>
-    
-  const container = document.getElementById('container');
- 
- 
-  
+
+    const container = document.getElementById('container');
+
+    const button = document.getElementById('button').addEventListener('click', function () {
+        let amount = prompt("How many squares per line do you want?");
+        clear();
+        return makeGrid(amount)
+    });
 
 
-  function makeGrid(amount) {
-    container.style.setProperty('--grid-rows', amount);
-    container.style.setProperty('--grid-cols', amount);
-    for (i=0; i<(amount*amount); i++) {
-        let cell = document.createElement('div');
-        cell.classList = "cell";
-        container.appendChild(cell)
+
+    function clear() {
+        let blacks = document.querySelectorAll(".cellEtched");
+        blacks.forEach(black => black.classList.remove("cellEtched"))
     }
+
+
+
+    function makeGrid(amount) {
+        container.style.setProperty('--grid-rows', amount);
+        container.style.setProperty('--grid-cols', amount);
+
+        for (i = 0; i < (amount * amount); i++) {
+            let cell = document.createElement('div');
+            cell.classList = "cell";
+            container.appendChild(cell)
+        }
         const cells = document.querySelectorAll(".cell").forEach(cell => {
-            cell.addEventListener('mouseover', event =>
-            {cell.classList.add("cellEtched")})
+            cell.addEventListener('mouseover', event => { cell.classList.add("cellEtched") })
         })
-        
-        
-  }
 
-//   function createDiv(amount) {
-//     for (i=0; i < (amount*amount); i++) {
-//         let div = document.createElement('div');
-//         div.innerText = "im a new div"
-//         div.classList = "cell"
-//         container.appendChild(div)
-//     }
-//     return 
-//   }
 
-  makeGrid(16)
-  
+    }
+
+
+
+    makeGrid(16)
+
 
 </script>
+
 </html>
