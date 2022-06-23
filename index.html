@@ -6,42 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-a-Sketch</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+    <link rel="stylesheet" href="styles.css">
+    <script src="js-file.js" defer></script>
 
-        button {
-            margin-top: 10px;
-            margin-bottom: 20px;
-
-        }
-
-        #container {
-            display: grid;
-            /* justify-content: stretch;
-        align-content: stretch; */
-            margin-left: auto;
-            margin-right: auto;
-            width: 600px;
-            height: 600px;
-            grid-template-rows: repeat(var(--grid-rows), 1fr);
-            grid-template-columns: repeat(var(--grid-cols), 1fr);
-            border: 3px solid black;
-        }
-
-        .cell {
-            background-color: white;
-        }
-
-
-        .cellEtched {
-            background-color: black;
-        }
-    </style>
 </head>
 
 <body>
@@ -49,46 +16,6 @@
     <div id="container"></div>
 
 </body>
-<script>
 
-    const container = document.getElementById('container');
-
-    const button = document.getElementById('button').addEventListener('click', function () {
-        let amount = prompt("How many squares per line do you want?");
-        clear();
-        return makeGrid(amount)
-    });
-
-
-
-    function clear() {
-        let blacks = document.querySelectorAll(".cellEtched");
-        blacks.forEach(black => black.classList.remove("cellEtched"))
-    }
-
-
-
-    function makeGrid(amount) {
-        container.style.setProperty('--grid-rows', amount);
-        container.style.setProperty('--grid-cols', amount);
-
-        for (i = 0; i < (amount * amount); i++) {
-            let cell = document.createElement('div');
-            cell.classList = "cell";
-            container.appendChild(cell)
-        }
-        const cells = document.querySelectorAll(".cell").forEach(cell => {
-            cell.addEventListener('mouseover', event => { cell.classList.add("cellEtched") })
-        })
-
-
-    }
-
-
-
-    makeGrid(16)
-
-
-</script>
 
 </html>
